@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 public function up(): void {
 Schema::create('stores', function (Blueprint $table) {
+$table->engine = 'InnoDB';
 $table->id();
 $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete();
 $table->string('name');

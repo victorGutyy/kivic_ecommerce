@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 public function up(): void {
 Schema::create('orders', function (Blueprint $table) {
+$table->engine = 'InnoDB';
 $table->id();
 $table->foreignId('store_id')->constrained()->cascadeOnDelete();
 $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();

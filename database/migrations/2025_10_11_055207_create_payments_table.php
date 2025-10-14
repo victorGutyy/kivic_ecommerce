@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->unsignedInteger('amount');
+            $table->string('payment_method'); // e.g. credit_card, paypal
+            $table->string('status')->default('pending'); // pending, completed, failed
             $table->timestamps();
         });
     }
