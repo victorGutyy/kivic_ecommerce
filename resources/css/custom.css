@@ -1,0 +1,225 @@
+/* ==============================
+   KIVIC E-COMMERCE – custom.css
+   ============================== */
+
+:root {
+  --brand: #4f46e5;
+  --brand-light: #6366f1;
+  --text-main: #111827;
+  --text-muted: #4b5563;
+  --bg-light: #f9fafb;
+  --radius: 0.75rem;
+  --transition: all 0.25s ease;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #e0e7ff 0%, #f9fafb 90%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ======= HERO ======= */
+.hero {
+  width: 100%;
+  max-width: 850px;
+  margin-top: 3rem;
+  text-align: center;
+  padding: 2rem;
+  border-radius: var(--radius);
+}
+
+/* Logo */
+.logo {
+  height: 80px;
+  width: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+/* Título principal */
+.title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+/* Párrafo de bienvenida */
+.lead {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+/* Subtítulo */
+.subtitle {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+/* ======= FORMULARIO ======= */
+.email-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius);
+  background: white;
+  transition: var(--transition);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+}
+
+.btn {
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.9rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background: var(--brand-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+/* ======= IMAGEN DE TIENDA ======= */
+.hero-shot {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-shot img {
+  max-width: 600px;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* ======= FOOTER ======= */
+footer {
+  width: 100%;
+  background: white;
+  margin-top: auto;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+footer a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: var(--brand-light);
+}
+
+/* ======= RESPONSIVE ======= */
+@media (min-width: 640px) {
+  .email-form {
+    flex-direction: row;
+  }
+  .input {
+    flex: 1;
+  }
+}
+
+:root{
+  --brand:#4f46e5; --brand-light:#6366f1;
+  --text-main:#111827; --text-muted:#4b5563;
+  --radius:.75rem; --transition:.25s ease;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+img{display:block;max-width:100%;height:auto}
+
+body{
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+  min-height:100vh;
+  color:var(--text-main);
+  display:flex;flex-direction:column;
+  background:#f6f7fb;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.85) 0%, rgba(246,247,251,.92) 85%),
+    url("/assets/fondo2.png") center/cover no-repeat;
+}
+
+.page{
+  width:100%;
+  max-width:1000px;
+  margin:0 auto;
+  padding:3rem 1rem 4rem;
+  display:flex; flex-direction:column; align-items:center;
+}
+
+.hero{ width:100%; max-width:860px; text-align:center; }
+.logo{ height:80px; width:auto; margin:0 auto 1rem; }
+.title{ font-size:clamp(2rem,4vw,2.6rem); font-weight:800; letter-spacing:-.3px; }
+.lead{ margin:.75rem auto 0; color:var(--text-muted); line-height:1.55; max-width:640px; }
+.subtitle{ margin-top:1.25rem; color:var(--brand); font-weight:700; font-size:1.35rem; }
+
+.email-form{ margin:1.1rem auto 0; display:flex; gap:.9rem; flex-direction:column; max-width:520px; }
+@media (min-width:640px){ .email-form{ flex-direction:row; } }
+.input{
+  flex:1; padding:.95rem 1rem; font-size:1rem; background:#fff;
+  border:1px solid #d1d5db; border-radius:var(--radius);
+  box-shadow:0 1px 2px rgba(0,0,0,.05); outline:0;
+}
+.input:focus{ border-color:var(--brand); box-shadow:0 0 0 3px rgba(79,70,229,.25); }
+.btn{
+  padding:.95rem 1.4rem; border:0; border-radius:var(--radius);
+  background:var(--brand); color:#fff; font-weight:700; cursor:pointer;
+  transition:transform .15s var(--transition), background-color var(--transition);
+}
+.btn:hover{ background:var(--brand-light); transform:translateY(-2px); box-shadow:0 6px 18px rgba(79,70,229,.25); }
+
+.hero-shot{ margin-top:1.75rem; display:flex; justify-content:center; }
+.hero-shot img{ max-width:640px; border-radius:.75rem; box-shadow:0 14px 34px rgba(0,0,0,.15); }
+
+footer{ width:100%; background:#fff; border-top:1px solid #e5e7eb; text-align:center; padding:1.5rem 1rem; margin-top:auto; color:var(--text-muted) }
+footer a{ color:var(--brand); text-decoration:none }
+footer a:hover{ text-decoration:underline; color:var(--brand-light) }
