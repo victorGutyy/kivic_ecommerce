@@ -598,4 +598,164 @@ footer a:hover { text-decoration: underline; color: #6366f1; }
   .product-view{grid-template-columns:1fr; gap:1.5rem}
 }
 
+:root{
+  --bg: #f7f7fb;
+  --panel: #ffffff;
+  --txt: #111827;
+  --muted:#6b7280;
+  --brand:#6d5efc;      /* violeta */
+  --brand-600:#6153f2;
+  --brand-700:#574ae6;
+  --brand-100:#ecebff;
+  --accent:#22c1c3;     /* turquesa */
+  --ok:#10b981;
+  --danger:#ef4444;
+  --radius: 16px;
+  --shadow-lg: 0 10px 30px rgba(17,24,39,.08);
+  --shadow-sm: 0 6px 16px rgba(17,24,39,.06);
+}
+
+/* Fondo “Soft Aurora” */
+body{
+  background:
+    radial-gradient(1200px 1200px at 10% -10%, rgba(109,94,252,.12), transparent 60%),
+    radial-gradient(1000px 900px at 90% 0%, rgba(34,193,195,.10), transparent 55%),
+    var(--bg);
+  color:var(--txt);
+}
+
+/* Contenedor */
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Paneles */
+.card, .shop-filters, .shopbar, .cart-page .cart-table,
+.cart-summary, .product-grid .product{
+  background:var(--panel);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
+}
+
+/* Header “glass” */
+.shopbar{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.75);
+  border:1px solid rgba(109,94,252,.08);
+  margin-bottom:20px;
+}
+
+/* Buscador */
+.shopbar__search input{
+  height:44px; border-radius:12px; border:1px solid #e5e7eb;
+  padding:0 44px 0 44px; background:#fff;
+}
+.shopbar__search{ position:relative; }
+.shopbar__search:before{
+  content:""; position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  width:20px; height:20px; opacity:.5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%236b7280' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M21 21l-4.2-4.2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  height:44px;padding:0 18px;border-radius:12px;border:0;cursor:pointer;font-weight:600}
+.btn--primary{ background:linear-gradient(90deg,var(--brand),var(--accent)); color:#fff; }
+.btn--primary:hover{ filter:brightness(.98) }
+.btn--light{ background:#f3f4f6; color:#111827 }
+.btn--danger{ background:var(--danger); color:#fff }
+
+/* Pills */
+.pill{background:#fff;border:1px solid #eee;padding:8px 14px;border-radius:999px;
+  color:#374151;box-shadow:var(--shadow-sm)}
+.pill.active{ background:var(--brand-100); color:var(--brand-700); border-color:transparent }
+
+/* Tarjeta de producto */
+.product{
+  overflow:hidden; transition:transform .18s ease, box-shadow .18s ease; border:1px solid #eef2ff;
+}
+.product:hover{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(93,80,255,.15) }
+.product__img{ aspect-ratio: 4/3; width:100%; object-fit:cover; background:#f9fafb }
+.product__title{ font-weight:600; margin:8px 0 6px }
+.product__price{ font-size:1.05rem; font-weight:700; color:#111827 }
+.badge--new{ position:absolute; top:14px; left:14px; background:#14b8a6; color:#fff;
+  padding:6px 10px; border-radius:999px; font-size:.75rem; box-shadow:var(--shadow-sm) }
+
+/* Sidebar */
+.shop-filters{ padding:16px; border:1px solid #eef2ff }
+.shop-filters details{ margin-bottom:8px }
+.shop-filters summary{ font-weight:700; cursor:pointer }
+.filter-list a{ display:block; padding:8px 10px; border-radius:10px; color:#374151 }
+.filter-list a.is-active{ background:var(--brand-100); color:var(--brand-700) }
+
+/* Grid */
+.product-grid{
+  display:grid; gap:22px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+/* Paginación */
+.pagination nav{ display:flex; gap:8px; justify-content:center; margin:26px 0 }
+.pagination a, .pagination span{ padding:10px 14px; border-radius:10px; border:1px solid #e5e7eb }
+.pagination .active span{ background:var(--brand); color:#fff; border-color:transparent }
+
+/* Floating cart */
+.cart-fab{
+  position:fixed; right:20px; bottom:20px; z-index:60;
+  background:var(--brand); color:#fff; width:56px; height:56px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-lg)
+}
+.cart-fab__count{
+  position:absolute; top:-6px; right:-6px; background:#111827; color:#fff;
+  min-width:22px; height:22px; padding:0 6px; border-radius:999px; font-size:.75rem;
+  display:flex; align-items:center; justify-content:center; border:2px solid #fff
+}
+
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0b1020; --panel:#0f172a; --txt:#e5e7eb; --muted:#94a3b8;
+         --brand-100:#1f1b50; }
+  .product, .shop-filters, .shopbar, .cart-page .cart-table, .cart-summary{
+    border-color: rgba(255,255,255,.06);
+  }
+  .btn--light{ background:#1f2937; color:#e5e7eb }
+  .pill{ background:#0f172a; border-color:#1f2440; color:#cbd5e1 }
+}
+/* ---- Product card ---- */
+.product { background: #0f1220; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+.product__cover { display:block; position:relative; background: radial-gradient(120% 80% at 50% 20%, #2a2f43 0%, #151829 60%, #0e1121 100%); }
+.product__img   { width: 100%; height: 220px; object-fit: contain; display:block; }
+@media (min-width: 1280px){ .product__img { height: 260px; } }
+
+.badge--new { position:absolute; top:10px; left:10px; background:#22c55e; color:#06121d; font-weight:700;
+  border-radius:999px; padding:5px 10px; font-size:12px; box-shadow: 0 4px 12px rgba(34,197,94,.35); }
+
+.product__body  { padding: 14px 14px 16px; }
+.product__title { margin:0 0 6px; font-weight:600; line-height:1.25; font-size:15px; }
+.product__title a{ color:#e6ebff; text-decoration:none; }
+.product__title a:hover{ color:#9db2ff; }
+.product__price { font-weight:700; font-size:16px; color:#a7b5ff; margin: 2px 0 10px; }
+.product__actions{ margin-top:8px; }
+.btn--full{ width:100%; }
+
+/* ---- Filters (sidebar) ---- */
+.shop-filters { background:#121624; color:#e7ebf7; border-radius:18px; padding:14px; box-shadow: 0 12px 28px rgba(0,0,0,.35); }
+.shop-filters details summary{ cursor:pointer; color:#cfd6ee; }
+.shop-filters a{ color:#cbd3ea; text-decoration:none; display:block; padding:8px 10px; border-radius:10px; }
+.shop-filters a:hover{ background:#1a2036; color:#ffffff; }
+.shop-filters a.is-active{ background:#232b49; color:#ffffff; font-weight:600; }
+
+/* ---- Pills ---- */
+.pill{ background:#121624; color:#e8edff; border:1px solid #2a3560; }
+.pill.active{ background:#2b3891; color:#fff; }
+.pill.clear{ background:transparent; color:#ff7070; border-color:#ff7070; }
+
+/* ---- Cart compact rows ---- */
+.cart-table{ display:grid; gap:14px; }
+.cart-row{ display:grid; grid-template-columns: 80px 1fr auto; gap:12px; align-items:center; background:#0f1220; padding:12px; border-radius:14px; }
+.cart-img{ width:80px; height:80px; object-fit:cover; border-radius:10px; }
+.cart-info{ color:#e6ebff; }
+.cart-title{ font-weight:600; margin-bottom:4px; }
+.cart-price-unit{ color:#9db2ff; font-weight:700; }
+.cart-line-right{ text-align:right; }
+.cart-line-total{ font-weight:800; color:#a7ffa8; }
+
 

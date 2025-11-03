@@ -26,20 +26,24 @@
 
       {{-- NAVBAR DERECHA --}}
     @php
-      $cartCount = collect(session('cart', []))->sum('quantity');
-    @endphp
+  $cartCount = collect(session('cart', []))->sum('quantity');
+@endphp
 
-<nav class="shopbar__links">
-  <a href="{{ route('shop.index', ['store' => $store->slug ?? 'moda-basica']) }}">Categorías</a>
-  <a href="{{ route('cart.view') }}" class="cart-link">
-    🛒 <span class="cart-count">{{ $cartCount }}</span>
+<nav class="shopbar__links" style="display:flex;gap:16px;align-items:center">
+  <a href="{{ route('shop.index',['store'=>$store->slug ?? 'moda-basica']) }}">Categorías</a>
+
+  <a href="{{ route('cart.view') }}" class="cart-link" style="position:relative;display:inline-flex;align-items:center;gap:.5rem">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8"><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h3l3 12h10l2-8H6"/></svg>
+    <span class="cart-count">{{ $cartCount }}</span>
   </a>
+
   @auth
     <a href="{{ route('dashboard') }}">Panel</a>
   @else
     <a href="{{ route('login') }}">Ingresar</a>
   @endauth
 </nav>
+
 
     </div>
   </header>
@@ -48,6 +52,16 @@
     @yield('content')
   </main>
 
+  @php $cartCount = collect(session('cart', []))->sum('quantity'); @endphp
+<a href="{{ route('cart.view') }}" class="cart-fab" aria-label="Ver carrito">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h3l3 12h10l2-8H6"/></svg>
+  @if($cartCount)
+    <span class="cart-fab__count">{{ $cartCount }}</span>
+  @endif
+</a>
+
+
   @include('partials.footer') {{-- footer global de KIVIC --}}
+
 </body>
 </html>
