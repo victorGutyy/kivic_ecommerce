@@ -485,3 +485,117 @@ footer a:hover { text-decoration: underline; color: #6366f1; }
   .footer-bottom { flex-direction: column; text-align: center; gap: 1rem; }
 }
 
+/* ===============================
+   SHOP: topbar, layout y tarjetas
+   =============================== */
+.container { width:min(1200px, 95%); margin-inline:auto; }
+
+.shopbar{ position:sticky; top:0; z-index:40; background:#fff; border-bottom:1px solid #e5e7eb; }
+.shopbar__inner{ height:70px; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.shopbar__brand{ display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:#111827; font-weight:800; }
+.shopbar__logo{ height:28px; width:auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,.15)); }
+.shopbar__links a{ color:#374151; text-decoration:none; margin-left:1rem; font-weight:600; }
+.shopbar__links a:hover{ color:#111827; }
+
+.shopbar__search{ flex:1; display:flex; gap:.5rem; max-width:640px; }
+.shopbar__search input{ flex:1; padding:.65rem .9rem; border:1px solid #cbd5e1; border-radius:.7rem; }
+.shopbar__search button{ padding:.65rem 1rem; border:0; border-radius:.7rem; background:linear-gradient(90deg,#4f46e5,#6366f1); color:#fff; font-weight:700; }
+
+.shop-page{ padding: 1.25rem 0 2rem; }
+.shop-layout{ display:grid; grid-template-columns: 260px 1fr; gap:2rem; }
+@media (max-width: 980px){ .shop-layout{ grid-template-columns:1fr; } }
+
+.shop-filters{ position:sticky; top:90px; align-self:start; background:#fff; border:1px solid #e5e7eb; border-radius:1rem; padding:1rem; box-shadow:0 8px 24px rgba(0,0,0,.05); }
+.shop-filters h3{ font-weight:800; font-size:1.05rem; margin-bottom:.5rem; color:#0f172a; }
+.shop-filters summary{ cursor:pointer; font-weight:700; color:#1f2937; margin:.5rem 0; }
+.filter-list{ list-style:none; margin:.35rem 0 .75rem; padding:0; }
+.filter-list a{ display:block; padding:.3rem .2rem; text-decoration:none; color:#374151; border-radius:.35rem; }
+.filter-list a:hover{ background:#f3f4f6; }
+.filter-list a.is-active{ color:#4f46e5; font-weight:700; }
+
+.price-form{ display:grid; grid-template-columns:1fr 1fr auto; gap:.4rem; }
+.price-form input{ padding:.5rem .6rem; border:1px solid #cbd5e1; border-radius:.5rem; }
+.price-form button{ padding:.5rem .8rem; border:0; border-radius:.5rem; background:#111827; color:#fff; }
+
+.shop-main { min-width:0; }
+.cat-pills{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem; }
+.pill{ display:inline-flex; align-items:center; padding:.45rem .75rem; border:1px solid #e5e7eb; border-radius:999px; text-decoration:none; color:#374151; background:#fff; }
+.pill:hover{ background:#f9fafb; }
+.pill.active{ border-color:#c7d2fe; background:#eef2ff; color:#4338ca; }
+.pill.clear{ border-color:#fca5a5; background:#fef2f2; color:#b91c1c; }
+
+.product-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:1rem; }
+
+.card{ background:#fff; border:1px solid #e5e7eb; border-radius:1rem; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.05); display:flex; flex-direction:column; }
+.card__img{ display:block; position:relative; aspect-ratio: 4/3; background:#f8fafc; }
+.card__img img{ width:100%; height:100%; object-fit:cover; }
+.badge{ position:absolute; left:.6rem; top:.6rem; padding:.25rem .5rem; border-radius:.5rem; font-size:.72rem; font-weight:800; color:#fff; }
+.badge--new{ background:#10b981; }
+.card__body{ padding:.8rem .9rem; display:flex; flex-direction:column; gap:.4rem; }
+.card__title{ font-size:.98rem; line-height:1.2; }
+.card__title a{ color:#111827; text-decoration:none; }
+.card__title a:hover{ color:#4338ca; }
+.card__price{ font-weight:800; color:#111827; }
+.card__actions{ margin-top:.35rem; }
+.btn.btn--primary{ display:inline-flex; align-items:center; justify-content:center; padding:.55rem .8rem; background:linear-gradient(90deg,#4f46e5,#6366f1); color:#fff; border-radius:.6rem; border:0; font-weight:700; width:100%; }
+.btn.btn--primary:hover{ filter:brightness(1.05); transform: translateY(-1px); }
+
+.pagination{ display:flex; justify-content:center; margin-top:1rem; }
+.empty{ border:1px dashed #e5e7eb; padding:2rem; border-radius:1rem; text-align:center; color:#6b7280; }
+
+/* ======= Product view ======= */
+.container{width:min(1200px,95%);margin-inline:auto}
+
+.product-view{
+  display:grid; grid-template-columns:1.1fr 1fr; gap:2.5rem; align-items:start;
+  margin:2rem auto 4rem;
+}
+.pv-breadcrumbs{margin-top:1rem}
+.pv-breadcrumbs a{color:#4f46e5;text-decoration:none}
+.pv-breadcrumbs a:hover{text-decoration:underline}
+
+.pv-gallery{
+  background:#fff; border-radius:1rem; padding:1rem;
+  box-shadow:0 14px 34px rgba(0,0,0,.08);
+}
+.pv-cover{
+  width:100%; height:auto; border-radius:.8rem; display:block;
+  box-shadow:0 10px 24px rgba(0,0,0,.10);
+}
+.pv-thumbs{
+  display:flex; gap:.6rem; margin-top:.8rem; flex-wrap:wrap;
+}
+.pv-thumb{
+  width:80px; height:80px; object-fit:contain; border-radius:.6rem; cursor:pointer;
+  background:#f8f8ff; border:1px solid #e5e7eb; transition:transform .15s;
+}
+.pv-thumb:hover{transform:translateY(-2px)}
+
+.pv-info{}
+.pv-title{font-size:clamp(1.4rem,2.4vw,2rem);font-weight:800;color:#0f172a;line-height:1.2}
+.pv-price{margin:.6rem 0 1rem; font-weight:800; color:#111827; font-size:1.4rem}
+.pv-desc{color:#374151; line-height:1.85}
+
+.pv-buy{margin-top:1rem; display:grid; gap:1rem; max-width:380px}
+.pv-qtylabel{font-weight:600; color:#374151}
+.pv-qty{display:flex; align-items:center; gap:.5rem}
+.pv-qty input{
+  width:80px; padding:.6rem .7rem; text-align:center; border:1px solid #cbd5e1; border-radius:.7rem;
+}
+.qbtn{
+  width:38px; height:38px; border:0; border-radius:.7rem; cursor:pointer;
+  background:#eef2ff; color:#3730a3; font-weight:800; font-size:1.1rem;
+}
+.qbtn:active{transform:scale(.98)}
+.pv-add{width:100%}
+
+.pv-bullets{margin-top:1rem; list-style:none; padding:0}
+.pv-bullets li{margin:.35rem 0; color:#1f2937}
+.pv-bullets li::before{content:"✔"; color:#22c55e; margin-right:.5rem; font-weight:800}
+
+/* Responsive */
+@media (max-width: 980px){
+  .product-view{grid-template-columns:1fr; gap:1.5rem}
+}
+
+

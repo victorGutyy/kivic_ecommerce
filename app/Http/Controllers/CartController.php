@@ -1,62 +1,85 @@
 <?php
+
 namespace App\Http\Controllers;
 
-
+use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Models\Variant;
-
 
 class CartController extends Controller
 {
-public function view(Request $request)
-{
-$cart = session('cart', []); // [ [product_id, variant_id, title, price, qty], ... ]
-$total = collect($cart)->sum(fn($i) => $i['price'] * $i['qty']);
-return view('shop.cart', compact('cart','total'));
-}
+    // GET /cart
+    public function view(Request $request)
+    {
+        $cart = $request->session()->get('cart', []);
 
+        // Totales (en pesos)
+        $subtotal = collect($cart)->sum(fn ($i) => (int)$i['price'] * (int)$i['quantity']);
+        $iva      = (int) round($subtotal * 0.19);   // 19%
+        $shipping = 0;                               // MVP
+        $total    = $subtotal + $iva + $shipping;
 
-public function add(Request $request)
-{
-$data = $request->validate([
-'product_id' => 'required|integer',
-'variant_id' => 'nullable|integer',
-'title' => 'required|string',
-'price' => 'required|integer',
-'qty' => 'required|integer|min:1',
-]);
-$cart = session('cart', []);
-$key = collect($cart)->search(fn($i) => $i['product_id']==$data['product_id'] && ($i['variant_id'] ?? null) == ($data['variant_id'] ?? null));
-if ($key !== false) {
-$cart[$key]['qty'] += $data['qty'];
-} else {
-$cart[] = $data;
-}
-session(['cart' => $cart]);
-return redirect()->route('cart.view');
-}
+        $fmt = fn (int $v) => '$ ' . number_format($v, 0, ',', '.');
 
+        return view('shop.cart', compact('cart', 'subtotal', 'iva', 'shipping', 'total', 'fmt'));
+    }
 
-public function update(Request $request)
-{
-$items = $request->input('items', []); // [index => qty]
-$cart = session('cart', []);
-foreach ($items as $i => $qty) {
-if (isset($cart[$i])) {
-$cart[$i]['qty'] = max(1, (int)$qty);
-}
-}
-session(['cart'=>$cart]);
-return redirect()->route('cart.view');
-}
+    // POST /cart/add/{product}
+    public function add(Request $request, Product $product)
+    {
+        $qty  = max(1, (int)$request->input('qty', 1));
+        $cart = $request->session()->get('cart', []);
 
+        // 1 sola línea por producto (clave = id)
+        if (isset($cart[$product->id])) {
+            $cart[$product->id]['quantity'] += $qty;
+        } else {
+            $img = optional($product->images->first())->src ?? asset('assets/tienda1.png');
+            $cart[$product->id] = [
+                'id'       => $product->id,
+                'title'    => $product->title,
+                'price'    => (int) $product->price,   // en pesos
+                'image'    => $img,
+                'quantity' => $qty,
+            ];
+        }
 
-public function remove(Request $request)
-{
-$i = (int) $request->input('index');
-$cart = session('cart', []);
-if (isset($cart[$i])) unset($cart[$i]);
-session(['cart'=>array_values($cart)]);
-return redirect()->route('cart.view');
-}
+        $request->session()->put('cart', $cart);
+
+        return back();
+    }
+
+    // POST /cart/update
+    public function update(Request $request)
+    {
+        $id   = (int) $request->input('product_id');
+        $qty  = max(1, (int) $request->input('qty', 1));
+        $cart = $request->session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $qty;
+            $request->session()->put('cart', $cart);
+        }
+
+        return back();
+    }
+
+    // POST /cart/remove
+    public function remove(Request $request)
+    {
+        $id   = (int) $request->input('product_id');
+        $cart = $request->session()->get('cart', []);
+
+        unset($cart[$id]);
+        $request->session()->put('cart', $cart);
+
+        return back();
+    }
+
+    // POST /cart/clear
+    public function clear(Request $request)
+    {
+        $request->session()->forget('cart');
+
+        return back();
+    }
 }
