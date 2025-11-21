@@ -9,14 +9,40 @@
             </div>
 
             {{-- DERECHA: Menú principal --}}
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @auth
-                    <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 hover:text-indigo-600 px-3">Panel</a>
-                    <a href="{{ route('products.index') }}" class="text-sm text-gray-700 hover:text-indigo-600 px-3">Productos</a>
-                @endauth
-                <a href="{{ route('shop.index', ['store' => 'moda-basica']) }}"
-                   class="text-sm text-gray-700 hover:text-indigo-600 px-3">Ver Tienda</a>
-            </div>
+<div class="hidden sm:flex sm:items-center sm:ml-6 space-x-3">
+
+    {{-- Links públicos (siempre visibles) --}}
+    <a href="#servicios" class="text-sm text-gray-700 hover:text-indigo-600">Servicios</a>
+    <a href="#contenido" class="text-sm text-gray-700 hover:text-indigo-600">Contenido</a>
+    <a href="#precios"   class="text-sm text-gray-700 hover:text-indigo-600">Precios</a>
+
+    @auth
+        {{-- Usuario autenticado --}}
+        <a href="{{ route('dashboard') }}"
+           class="text-sm text-gray-700 hover:text-indigo-600">
+            Panel
+        </a>
+
+        <a href="{{ route('stores.create.step1') }}"
+           class="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-full
+                  border border-indigo-500 text-indigo-600 hover:bg-indigo-50">
+            CREAR TIENDA
+        </a>
+    @else
+        {{-- Invitado --}}
+        <a href="{{ route('login') }}"
+           class="text-sm text-gray-700 hover:text-indigo-600">
+            Ingresar
+        </a>
+
+        <a href="{{ route('register') }}"
+           class="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-full
+                  border border-lime-400 text-lime-600 hover:bg-lime-50">
+            CREAR TIENDA
+        </a>
+    @endauth
+</div>
+
 
             {{-- HAMBURGUESA (móvil) --}}
             <div class="-mr-2 flex items-center sm:hidden">

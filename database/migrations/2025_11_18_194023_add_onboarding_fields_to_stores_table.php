@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::table('stores', function (Blueprint $table) {
+            $table->string('brand_name')->nullable();     // nombre público de la marca
+            $table->string('industry')->nullable();       // categoría (Moda, Alimentos, etc.)
+            $table->string('phone')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('city')->nullable();
+            $table->string('plan')->default('free');      // plan inicial
+            $table->string('theme')->default('kivic-classic'); // tema inicial
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('stores', function (Blueprint $table) {
+            $table->dropColumn([
+                'brand_name','industry','phone','whatsapp',
+                'instagram','city','plan','theme'
+            ]);
+        });
+    }
+};

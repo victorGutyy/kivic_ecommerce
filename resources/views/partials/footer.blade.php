@@ -2,7 +2,7 @@
   <div class="footer-container">
     <!-- Logo + redes -->
     <div class="footer-brand">
-      <img src="{{ asset('assets/logo.png') }}" alt="KIVIC logo" class="footer-logo">
+      <img src="{{ asset('assets/kivic-logo.png') }}" alt="KIVIC logo" class="footer-logo">
       <p class="footer-slogan">Innovamos tu comercio digital</p>
 
       <div class="footer-socials">

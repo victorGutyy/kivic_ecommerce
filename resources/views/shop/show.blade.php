@@ -1,6 +1,10 @@
 @extends('layouts.shop')
 
 @section('content')
+
+{{-- 🔹 CONTENEDOR PRINCIPAL CON THEME --}}
+<div class="product-view-page theme-{{ $theme ?? 'kivic-classic' }}">
+
 @php
   // Portada del producto (con respaldo por si no tiene imágenes asociadas)
   $cover = $product->images->first()->url ?? 'assets/tienda1.png';
@@ -11,6 +15,7 @@
 </nav>
 
 <div class="product-view container">
+
   {{-- Galería --}}
   <div class="pv-gallery">
     <img class="pv-cover" src="{{ asset($cover) }}" alt="{{ $product->title }}">
@@ -56,7 +61,11 @@
       <li>Soporte KIVIC</li>
     </ul>
   </div>
-</div>
+
+</div> {{-- product-view --}}
+
+</div> {{-- product-view-page + theme --}}
+{{-- 🔹 FIN DEL WRAPPER DEL THEME --}}
 
 {{-- JS mínimo para galería y cantidad --}}
 <script>
@@ -74,4 +83,5 @@ document.addEventListener('click', (e) => {
   }
 });
 </script>
+
 @endsection

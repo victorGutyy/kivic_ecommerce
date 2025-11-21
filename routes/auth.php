@@ -1,13 +1,18 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
-    Volt::route('register', 'pages.auth.register')
+    // 🔹 USAR TU CONTROLADOR PARA EL REGISTRO
+    Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
+    // 🔹 MANTENER LOGIN Y PASSWORD CON VOLT
     Volt::route('login', 'pages.auth.login')
         ->name('login');
 

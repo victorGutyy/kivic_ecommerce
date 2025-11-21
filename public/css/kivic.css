@@ -758,4 +758,232 @@ body{
 .cart-line-right{ text-align:right; }
 .cart-line-total{ font-weight:800; color:#a7ffa8; }
 
+/* ===============================
+   Formularios WIZARD CREACIÓN TIENDA
+   (paso 1 y paso 2)
+   =============================== */
+
+.page.onboarding {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+.page.onboarding .kivic-form {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 1.25rem;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+  padding: 1.75rem 1.75rem 2.1rem;
+}
+
+/* Label de los campos */
+.page.onboarding .kivic-form .form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+/* Inputs de texto */
+.page.onboarding .kivic-form input[type="text"],
+.page.onboarding .kivic-form input[type="email"],
+.page.onboarding .kivic-form input[type="tel"],
+.page.onboarding .kivic-form input[type="password"] {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #111827;              /* TEXTO OSCURO */
+  font-size: 0.9rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.page.onboarding .kivic-form input::placeholder {
+  color: #9ca3af;              /* gris, pero legible */
+}
+
+/* Focus bonito */
+.page.onboarding .kivic-form input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.22);
+}
+
+/* Errores */
+.page.onboarding .kivic-form .error {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: #dc2626;
+}
+
+/* Botón del wizard */
+.page.onboarding .kivic-form .form-actions {
+  margin-top: 1.4rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page.onboarding .kivic-form .btn.btn--primary {
+  border-radius: 999px;
+  padding-inline: 1.75rem;
+}
+
+/* ===============================
+   Paso 3: estilos de selección
+   de plan y plantilla
+   =============================== */
+
+/* Que toda la tarjeta sea clickeable */
+.page.onboarding label.plan-option,
+.page.onboarding label.theme-option,
+.page.onboarding form label {
+  cursor: pointer;
+}
+
+/* Borde base de las tarjetas (por si Tailwind no aplica bien) */
+.page.onboarding form label > div {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.9rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+/* Efecto al pasar el mouse */
+.page.onboarding form label:hover > div {
+  border-color: #a5b4fc;
+  transform: translateY(-1px);
+}
+
+/* AQUÍ está la magia:
+   cuando el radio está checked, el div que le sigue se resalta */
+.page.onboarding form label > input[type="radio"]:checked + div {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.20);
+  background: #f5f5ff;
+}
+
+/* ==================================================
+   THEMES KIVIC: classic, minimal, dark
+   Se activan con .theme-kivic-classic, etc.
+   ================================================== */
+
+/* ---------- 1) KIVIC CLASSIC (actual) ---------- */
+/* Es prácticamente tu diseño actual */
+.theme-kivic-classic {
+  /* Fondo suave lila */
+  background:
+    radial-gradient(1200px 1200px at 10% -10%, rgba(109,94,252,.10), transparent 60%),
+    radial-gradient(1000px 900px at 90% 0%, rgba(34,193,195,.06), transparent 55%),
+    #f7f7fb;
+}
+
+/* Opcional: pequeños ajustes locales dentro del tema */
+.theme-kivic-classic .shopbar {
+  background: rgba(255,255,255,.85);
+}
+
+.theme-kivic-classic .product {
+  background: #ffffff;
+  border-color: #e5e7eb;
+}
+
+/* ---------- 2) KIVIC MINIMAL (muy limpio, blanco) ---------- */
+.theme-kivic-minimal {
+  background: #f9fafb;
+}
+
+.theme-kivic-minimal .shopbar {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+}
+
+.theme-kivic-minimal .shop-filters {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(148, 163, 184, 0.12);
+}
+
+.theme-kivic-minimal .product {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 24px rgba(148, 163, 184, 0.15);
+}
+
+.theme-kivic-minimal .product__title a {
+  color: #0f172a;
+}
+
+.theme-kivic-minimal .btn.btn--primary {
+  background: linear-gradient(90deg, #4b5563, #111827);
+}
+
+/* ---------- 3) KIVIC DARK (modo oscuro elegante) ---------- */
+.theme-kivic-dark {
+  background: radial-gradient(circle at top, #111827 0, #020617 60%);
+  color: #e5e7eb;
+}
+
+/* Encabezado tienda */
+.theme-kivic-dark .shopbar {
+  background: rgba(15, 23, 42, 0.96);
+  border-color: rgba(148,163,184,.35);
+}
+
+/* Sidebar filtros */
+.theme-kivic-dark .shop-filters {
+  background: #020617;
+  border-color: rgba(148,163,184,.35);
+  box-shadow: 0 20px 40px rgba(0,0,0,.7);
+}
+
+.theme-kivic-dark .shop-filters h3,
+.theme-kivic-dark .shop-filters summary {
+  color: #e5e7eb;
+}
+
+.theme-kivic-dark .shop-filters a {
+  color: #cbd5f5;
+}
+.theme-kivic-dark .shop-filters a:hover {
+  background: #0f172a;
+  color: #fff;
+}
+
+/* Tarjeta de producto */
+.theme-kivic-dark .product {
+  background: #020617;
+  border-color: rgba(148,163,184,.35);
+  box-shadow: 0 18px 40px rgba(15,23,42,.9);
+}
+
+.theme-kivic-dark .product__title a {
+  color: #e5e7eb;
+}
+.theme-kivic-dark .product__title a:hover {
+  color: #a5b4fc;
+}
+
+.theme-kivic-dark .product__price {
+  color: #a7f3d0;
+}
+
+/* Botón principal */
+.theme-kivic-dark .btn.btn--primary {
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  box-shadow: 0 10px 30px rgba(34,197,94,.4);
+}
+
+/* Píldoras categorías */
+.theme-kivic-dark .pill {
+  background: #020617;
+  border-color: #1e293b;
+  color: #e5e7eb;
+}
+.theme-kivic-dark .pill.active {
+  background: #4f46e5;
+  border-color: transparent;
+}
+
+
 

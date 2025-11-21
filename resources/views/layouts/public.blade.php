@@ -53,17 +53,24 @@
 
     {{-- Acciones derecha --}}
     <div class="topbar__actions">
-      @guest
-        @if (Route::has('login'))
+  @guest
+      @if (Route::has('login'))
           <a href="{{ route('login') }}" class="topbar__link">Ingresar</a>
-        @endif
-        @if (Route::has('register'))
+      @endif
+
+      @if (Route::has('register'))
           <a href="{{ route('register') }}" class="topbar__cta">CREAR TIENDA</a>
-        @endif
-      @else
-        <a href="{{ route('dashboard') }}" class="topbar__link">Panel</a>
-      @endguest
-    </div>
+      @endif
+  @else
+      <a href="{{ route('dashboard') }}" class="topbar__link">Panel</a>
+
+      {{-- Botón para crear tienda cuando ya está logueado --}}
+      <a href="{{ route('stores.create.step1') }}" class="topbar__cta">
+          CREAR TIENDA
+      </a>
+  @endguest
+</div>
+
   </div>
 </nav>
 

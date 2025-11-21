@@ -56,11 +56,15 @@ class ShopController extends Controller
         // Categorías demo (coinciden con tus assets)
         $categories = ['playera', 'pantalon', 'zapatos', 'mochila', 'gorras'];
 
+        // 🔹 Theme de la tienda (kivic-classic, kivic-minimal, kivic-dark)
+        $theme = $store->theme ?? 'kivic-classic';
+
         return view('shop.index', [
-            'title'      => 'Tienda demo — KIVIC',
+            'title'      => ($store->brand_name ?: $store->name) . ' — KIVIC',
             'store'      => $store,
             'products'   => $products,
             'categories' => $categories,
+            'theme'      => $theme,
         ]);
     }
 
@@ -71,10 +75,14 @@ class ShopController extends Controller
 
         $product->load('images');
 
+        // 🔹 Theme también en la ficha de producto
+        $theme = $store->theme ?? 'kivic-classic';
+
         return view('shop.show', [
             'title'   => "{$product->title} — KIVIC",
             'store'   => $store,
             'product' => $product,
+            'theme'   => $theme,
         ]);
     }
 }

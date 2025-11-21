@@ -1,7 +1,10 @@
 @extends('layouts.shop')
 
 @section('content')
-<div class="shop-layout">
+
+{{-- 🔹 AÑADIMOS LA CLASE DEL TEMA EN EL CONTENEDOR PRINCIPAL --}}
+<div class="shop-layout theme-{{ $theme ?? 'kivic-classic' }}">
+
   {{-- Sidebar filtros (maqueta MVP) --}}
   <aside class="shop-filters">
     <h3>Filtros</h3>
@@ -69,5 +72,6 @@
       {{ $products->withQueryString()->links() }}
     </div>
   </section>
-</div>
+
+</div> {{-- fin: shop-layout con theme --}}
 @endsection
