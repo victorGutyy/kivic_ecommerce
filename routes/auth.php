@@ -4,6 +4,9 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::middleware('guest')->group(function () {
     // 🔹 USAR TU CONTROLADOR PARA EL REGISTRO
@@ -34,3 +37,13 @@ Route::middleware('auth')->group(function () {
     Volt::route('confirm-password', 'pages.auth.confirm-password')
         ->name('password.confirm');
 });
+
+Route::post('logout', function (Request $request) {
+    Auth::logout();
+
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('home'); // o donde quieras enviarlo después de salir
+})->middleware('auth')->name('logout');
+

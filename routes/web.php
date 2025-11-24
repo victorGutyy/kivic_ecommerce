@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StoreOnboardingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StoreProductController;
 
 // Landing pública
 Route::view('/', 'home')->name('home');
@@ -20,6 +21,15 @@ require __DIR__.'/auth.php';
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
+
+    Route::get('/tiendas/{store}/productos', [StoreProductController::class, 'index'])
+    ->name('stores.products.index');
+
+Route::get('/tiendas/{store}/productos/crear', [StoreProductController::class, 'create'])
+    ->name('stores.products.create');
+
+Route::post('/tiendas/{store}/productos', [StoreProductController::class, 'store'])
+    ->name('stores.products.store');
 
     // =========================
     // PERFIL DE USUARIO (Breeze)
@@ -54,7 +64,7 @@ Route::middleware('auth')->group(function () {
    Route::get('/dashboard', function () {
     $stores = \App\Models\Store::where('owner_id', auth()->id())->get();
 
-    return view('dashboard', compact('stores'));
+    return view('panel.dashboard', compact('stores'));
 })->name('dashboard');
 
 

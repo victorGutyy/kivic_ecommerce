@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_','-',app()->getLocale()) }}">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name','KIVIC') }}</title>
-  @vite(['resources/css/app.css','resources/js/app.js'])
-</head>
-<body class="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- NAVBAR -->
-  <nav class="sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
-    <div class="max-w-7xl mx-auto h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-      <a href="{{ route('home') }}" class="flex items-center gap-3">
-        <img src="{{ asset('assets/kivic-logo.png') }}" class="h-8 w-auto" alt="KIVIC">
-        <span class="text-lg font-extrabold tracking-tight">KIVIC <span class="text-indigo-600">E-Commerce</span></span>
+    <title>{{ config('app.name', 'KIVIC E-Commerce') }}</title>
+
+    {{-- Tailwind / app --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Estilos KIVIC --}}
+    <link rel="stylesheet" href="{{ asset('css/kivic.css') }}?v={{ filemtime(public_path('css/kivic.css')) }}">
+</head>
+
+<body class="auth-body">
+
+  <!-- NAVBAR SUPERIOR -->
+  <nav class="auth-navbar">
+    <div class="auth-navbar-inner">
+
+      {{-- Logo + país --}}
+      <a href="{{ route('home') }}" class="auth-brand">
+          <img src="{{ asset('assets/Kivic-logo.png') }}" alt="KIVIC" class="auth-brand-logo">
+
+          <span class="auth-made-co">
+              Hecho en Colombia
+              <img src="{{ asset('assets/flag-colombia.jpg') }}" alt="Colombia" class="auth-flag">
+          </span>
       </a>
 
-      <div class="hidden md:flex items-center gap-4">
-        <a href="{{ route('shop.index',['store'=>'moda-basica']) }}" class="text-sm font-semibold hover:text-indigo-600">Ver tienda demo</a>
+      {{-- Acciones --}}
+      <div class="auth-nav-actions">
         @guest
-          <a href="{{ route('login') }}" class="text-sm font-medium px-4 py-2 rounded border hover:bg-gray-50">Iniciar sesión</a>
-          <a href="{{ route('register') }}" class="text-sm font-medium px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700">Crear cuenta</a>
+            <a href="{{ route('login') }}" class="auth-link">Iniciar sesión</a>
+            <a href="{{ route('register') }}" class="auth-btn">Crear cuenta</a>
         @endguest
+
         @auth
-          <a href="{{ route('dashboard') }}" class="text-sm font-medium px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700">Ir al panel</a>
-        @endauth>
+            <a href="{{ route('dashboard') }}" class="auth-btn">Ir al panel</a>
+        @endauth
       </div>
     </div>
   </nav>
 
-  <!-- CONTENIDO -->
-  <main>
-    {{ $slot }}
+  <!-- CONTENIDO (CENTRADO) -->
+  <main class="auth-wrapper">
+      {{ $slot }}
   </main>
 
   <!-- FOOTER -->
-  <footer class="mt-20 border-t">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-500 flex items-center justify-between">
+  <footer class="auth-footer">
       <p>© {{ date('Y') }} KIVIC E-Commerce — Hecho para pymes.</p>
-      <a href="{{ route('shop.index',['store'=>'moda-basica']) }}" class="hover:text-indigo-600">Tienda demo</a>
-    </div>
+      <a href="{{ route('shop.index',['store'=>'moda-basica']) }}" class="auth-footer-link">Tienda demo</a>
   </footer>
+
 </body>
 </html>

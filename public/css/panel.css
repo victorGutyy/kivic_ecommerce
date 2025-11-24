@@ -1,0 +1,460 @@
+/* ============================================================
+   BASE PANEL KIVIC
+   ============================================================ */
+
+body.kivic-panel {
+    margin: 0;
+    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f3f4ff;
+    color: #0f172a;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.kp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background: radial-gradient(circle at top left, #22d3ee, #0f172a 55%, #7c3aed);
+    box-shadow: 0 4px 18px rgba(15, 23, 42, .7);
+}
+
+.kp-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.kp-logo-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background: #0f172a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #22d3ee;
+}
+
+.kp-logo-text {
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.kp-top-nav a {
+    margin-left: 16px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #e5e7eb;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+.kp-top-nav a:hover {
+    background: rgba(15, 23, 42, .35);
+}
+
+/* ============================================================
+   LAYOUT (SIDEBAR + CONTENIDO)
+   ============================================================ */
+
+.kp-shell {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f7f5ff 0%, #ecf1ff 45%, #e1f7ff 100%);
+    font-family: "Poppins", sans-serif;
+    color: #1b1f3b;
+}
+
+.kp-sidebar {
+    background: #020617;
+    border-right: 1px solid rgba(148, 163, 184, .3);
+    padding: 20px 16px;
+}
+
+.kp-sidebar-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.kp-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kp-sidebar li {
+    margin-bottom: 8px;
+}
+
+.kp-sidebar a {
+    text-decoration: none;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    border-radius: 8px;
+    display: block;
+}
+
+.kp-sidebar a:hover {
+    background: rgba(15, 23, 42, .8);
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+/* Uso doble por si usas kp-content o kp-main en las vistas */
+.kp-content,
+.kp-main {
+    padding: 40px 50px;
+}
+
+.kp-main h1,
+.kp-main h2,
+.kp-main h3,
+.kp-main h4 {
+    color: #1b1f3b;
+    font-weight: 700;
+}
+
+.kp-main h2 {
+    font-size: 1.55rem;
+}
+
+.kp-main h3 {
+    font-size: 1.25rem;
+}
+
+.kp-main p,
+.kp-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #1f2937;
+}
+
+.kp-page-title {
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+}
+
+/* ============================================================
+   CARDS Y GRID
+   ============================================================ */
+
+.kp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.kp-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(18px);
+    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.10);
+}
+
+.kp-card-primary {
+    background: linear-gradient(135deg, #00e0ff, #5b4bff);
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.kp-card-horizontal {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.kp-card h2 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+}
+
+.kp-card p {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: #1f2937;
+}
+
+.kp-card-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, .85);
+    font-size: 0.8rem;
+    color: #e5e7eb;
+}
+
+/* Títulos / secciones */
+
+.kp-section {
+    margin-top: 24px;
+}
+
+.kp-section-title {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.kp-empty {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+/* ============================================================
+   TARJETAS DE TIENDAS
+   ============================================================ */
+
+.kp-store-name {
+    margin: 0 0 4px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0b1020;
+}
+
+.kp-store-slug {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.kp-store-meta {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.kp-store-meta strong {
+    font-weight: 600;
+}
+
+.kp-store-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+
+.kp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: none;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #22d3ee, #6366f1);
+    transition: 0.2s ease;
+}
+
+.kp-btn:hover {
+    opacity: 0.92;
+    transform: scale(1.03);
+}
+
+.kp-btn-light {
+    background: #22d3ee;
+    color: #0f172a;
+    border: none;
+}
+
+.kp-btn-light:hover {
+    background: #06b6d4;
+}
+
+.kp-btn-ghost {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1b1f3b;
+    cursor: pointer;
+}
+
+.kp-btn-ghost:hover {
+    background: rgba(230, 230, 230, 0.9);
+    transform: scale(1.03);
+}
+
+/* ============================================================
+   FORMULARIOS EN EL PANEL (CREAR / EDITAR PRODUCTOS, ETC.)
+   ============================================================ */
+
+.kp-form-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 32px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    color: #1e293b;
+}
+
+.kp-form-card-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.kp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.kp-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.kp-field-inline {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 900px) {
+    .kp-field-inline {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.kp-field label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.kp-field input[type="text"],
+.kp-field input[type="number"],
+.kp-field input[type="file"],
+.kp-field textarea {
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.kp-field textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.kp-field input:focus,
+.kp-field textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.kp-help {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* Prefijo de moneda en el input de precio */
+
+.kp-input-prefix {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.kp-input-prefix-label {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    font-size: 0.8rem;
+    color: #0f172a;
+}
+
+/* Toggle activo/inactivo */
+
+.kp-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.kp-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #1f2937;
+}
+
+.kp-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+/* Alertas de validación */
+
+.kp-alert {
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+}
+
+.kp-alert-error {
+    background: rgba(239, 68, 68, .06);
+    border: 1px solid rgba(248, 113, 113, .7);
+    color: #b91c1c;
+}
+
+.kp-alert-error ul {
+    margin: 6px 0 0;
+    padding-left: 18px;
+}
+
+/* ============================================================
+   CONTRASTE EXTRA EN TARJETA PRINCIPAL
+   ============================================================ */
+
+.kp-card-primary h1,
+.kp-card-primary h2,
+.kp-card-primary h3 {
+    color: #02101f;
+}
+
+.kp-card-primary p {
+    color: #02101f;
+}

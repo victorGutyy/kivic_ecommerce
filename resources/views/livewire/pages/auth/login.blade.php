@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
+// Usamos el layout "guest" de Breeze, que ya está preparado con {{ $slot }}
 new #[Layout('layouts.guest')] class extends Component
 {
     public LoginForm $form;
@@ -22,50 +23,92 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
-}; ?>
+};
 
-<div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+?>
 
-    <form wire:submit="login">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
-        </div>
+<div class="hero hero--auth">
+    <section class="hero__card">
+        {{-- Estado de sesión (mensajes tipo "Sesión cerrada", etc.) --}}
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        {{-- Encabezado --}}
+        <header class="hero__header">
+            <p class="hero__pill">Bienvenido de nuevo</p>
+            <h1>Inicia sesión en KIVIC</h1>
+            <p class="hero__subtitle">
+                Usa el correo y la contraseña que registraste al crear tu tienda.
+            </p>
+        </header>
 
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        {{-- Formulario de login --}}
+        <form wire:submit="login" class="hero__form">
+            <!-- Email -->
+            <div class="hero__field">
+                <label for="email">Correo electrónico</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    wire:model="form.email"
+                    required
+                    autofocus
+                    autocomplete="username"
+                    placeholder="tunegocio@correo.com"
+                >
+                @error('form.email')
+                    <p class="hero__error">{{ $message }}</p>
+                @enderror
+            </div>
 
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
-        </div>
+            <!-- Password -->
+            <div class="hero__field">
+                <label for="password">Contraseña</label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    wire:model="form.password"
+                    required
+                    autocomplete="current-password"
+                    placeholder="••••••••"
+                >
+                @error('form.password')
+                    <p class="hero__error">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+            <!-- Remember me + enlace recuperar -->
+            <div class="hero__row">
+                <label class="hero__remember">
+                    <input
+                        id="remember"
+                        type="checkbox"
+                        wire:model="form.remember"
+                        name="remember"
+                    >
+                    <span>Recordarme</span>
+                </label>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" class="hero__link" wire:navigate>
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                @endif
+            </div>
+
+            <!-- Botón -->
+            <button type="submit" class="hero__btn">
+                Entrar al panel
+            </button>
+
+            <!-- Footer del formulario -->
+            <p class="hero__footer-text">
+                ¿Aún no tienes tienda?
+                <a href="{{ route('register') }}" class="hero__link">
+                    Crear tienda en KIVIC
                 </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+            </p>
+        </form>
+    </section>
 </div>

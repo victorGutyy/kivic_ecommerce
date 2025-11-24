@@ -166,6 +166,20 @@ body::before {
   opacity: 1;
 }
 
+.store-logo-placeholder {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--brand-primary, #4f46e5);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+
 /* ===============================
    LAYOUT GENERAL
    =============================== */
@@ -983,6 +997,289 @@ body{
 .theme-kivic-dark .pill.active {
   background: #4f46e5;
   border-color: transparent;
+}
+
+/* === LOGIN KIVIC (mismas vibes que crear tienda) === */
+
+.hero.hero--auth {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px 64px;
+    background: linear-gradient(135deg, #f5f3ff, #eef2ff);
+}
+
+.hero__card {
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px 24px 24px;
+    box-shadow: 0 24px 80px rgba(15,23,42,0.18);
+}
+
+.hero__header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.hero__pill {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-weight: 600;
+    color: #a855f7;
+    margin-bottom: 4px;
+}
+
+.hero__header h1 {
+    font-size: 1.6rem;
+    margin: 0 0 6px;
+    color: #1f2937;
+}
+
+.hero__subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.hero__form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.hero__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hero__field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.hero__field input[type="email"],
+.hero__field input[type="password"] {
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.hero__field input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 1px rgba(139,92,246,0.25);
+}
+
+.hero__error {
+    font-size: 0.8rem;
+    color: #b91c1c;
+}
+
+.hero__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.hero__remember {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #4b5563;
+}
+
+.hero__link {
+    color: #7c3aed;
+    text-decoration: none;
+    font-weight: 500;
+}
+.hero__link:hover {
+    text-decoration: underline;
+}
+
+.hero__btn {
+    margin-top: 6px;
+    width: 100%;
+    border-radius: 999px;
+    border: none;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 14px 40px rgba(99,102,241,0.35);
+}
+.hero__btn:hover {
+    filter: brightness(1.05);
+}
+
+.hero__footer-text {
+    margin: 10px 0 0;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #6b7280;
+}
+
+.kivic-made-co {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #292929;
+    text-transform: uppercase;
+}
+
+.kivic-made-co .co-flag {
+    width: 22px;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+/* Texto "Hecho en Colombia" en el header de auth */
+
+.auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.auth-brand-logo {
+    height: 36px;
+}
+
+.auth-made-co {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #111827;
+    text-transform: uppercase;
+}
+
+.auth-flag {
+    width: 22px;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.25);
+}
+
+/* ----- BODY GENERAL ----- */
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom right, #faf5ff, #ffffff);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ----- NAVBAR ----- */
+.auth-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid #eee;
+}
+
+.auth-navbar-inner {
+    max-width: 1400px;
+    margin: auto;
+    height: 70px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ----- BRAND ----- */
+.auth-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+}
+
+.auth-brand-logo {
+    height: 45px;
+}
+
+.auth-made-co {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.auth-flag {
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+}
+
+/* ----- NAV LINKS ----- */
+.auth-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.auth-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+    text-decoration: none;
+}
+
+.auth-btn {
+    background: #4f46e5;
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ----- CENTRAR FORMULARIO ----- */
+.auth-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* ----- FOOTER ----- */
+.auth-footer {
+    border-top: 1px solid #eee;
+    padding: 20px 40px;
+    color: #777;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.auth-footer-link {
+    color: #4f46e5;
+    text-decoration: none;
 }
 
 

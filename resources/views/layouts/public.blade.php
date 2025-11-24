@@ -19,8 +19,14 @@
     {{-- Brand --}}
     <a href="{{ route('home') }}" class="topbar__brand">
       <img src="{{ asset('assets/Kivic-logo.png') }}" alt="KIVIC" class="topbar__logo">
-      <span class="topbar__brandname">KIVIC</span>
+
+      <div class="kivic-made-co">
+          <span>Hecho en Colombia</span>
+          <img src="{{ asset('assets/flag-colombia.jpg') }}" alt="Colombia" class="co-flag">
+      </div>
     </a>
+
+
 
     {{-- Toggle mobile (checkbox hack, no JS) --}}
     <input id="nav-toggle" type="checkbox" class="topbar__toggle" />
