@@ -8,9 +8,10 @@ use App\Http\Controllers\StoreOnboardingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreProductController;
+use App\Http\Controllers\HomeController;
 
 // Landing pública
-Route::view('/', 'home')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Auth (Breeze)
 require __DIR__.'/auth.php';

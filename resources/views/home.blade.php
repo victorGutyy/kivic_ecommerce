@@ -22,6 +22,88 @@
   </div>
 </section>
 
+<section class="kivic-stores-strip">
+  <div class="container">
+    <h2 class="kivic-stores-title">Tiendas que confían en KIVIC</h2>
+
+    @if($featuredStores->isEmpty())
+      <p style="color:#6b7280; font-size:14px;">
+        Muy pronto verás aquí las marcas que usan KIVIC E-Commerce.
+      </p>
+    @else
+      <div class="stores-carousel">
+        @foreach($featuredStores as $store)
+          @php
+              $logo = $store->logo_path
+                  ? asset('storage/'.$store->logo_path)
+                  : asset('assets/Kivic-logo.png');
+          @endphp
+
+          <a href="{{ route('shop.index', ['store' => $store->slug]) }}"
+             class="store-pill"
+             title="{{ $store->brand_name ?? $store->name }}">
+            <img src="{{ $logo }}" alt="{{ $store->name }}">
+            <span>{{ $store->brand_name ?? $store->name }}</span>
+          </a>
+        @endforeach
+      </div>
+    @endif
+  </div>
+</section>
+
+<style>
+.kivic-stores-strip {
+    padding: 40px 0;
+    background: linear-gradient(90deg, #eef2ff, #e0f2fe);
+    margin-top: 40px;
+}
+
+.kivic-stores-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 16px;
+}
+
+.stores-carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scroll-snap-type: x mandatory;
+}
+
+.store-pill {
+    flex: 0 0 auto;
+    min-width: 150px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.12);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    scroll-snap-align: start;
+}
+
+.store-pill img {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 2px solid #e2e8f0;
+}
+
+.store-pill span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    white-space: nowrap;
+}
+</style>
+
+
  {{-- =========================
      SECCIÓN 1 – Construye tu marca (texto izq / imagen der)
      ========================= --}}
