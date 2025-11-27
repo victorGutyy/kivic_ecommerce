@@ -1,6 +1,11 @@
 @extends('layouts.shop')
 
 @section('content')
+
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 <div class="cart-page container">
   <h2>Carrito de compras</h2>
 
@@ -9,22 +14,49 @@
   @else
     <div class="cart-table">
       @foreach($cart as $id => $item)
+
+        @php
+            $raw = $item['image'] ?? null;
+
+            if (!$raw) {
+                // Sin imagen → placeholder genérico
+                $img = asset('assets/tienda1.png');
+            } else {
+                if (Str::startsWith($raw, ['http://', 'https://', '/'])) {
+                    // Ya viene como URL completa
+                    $img = $raw;
+                } elseif (Str::startsWith($raw, 'assets/')) {
+                    // Imágenes demo en public/assets/...
+                    $img = asset($raw);
+                } else {
+                    // Imágenes subidas por el usuario: storage/app/public/...
+                    // En sesión guardamos algo como "products/archivo.jpg"
+                    $img = asset('storage/'.$raw);
+                }
+            }
+
+            $title = $item['title'] ?? 'Producto';
+            $unitPrice = (int)($item['price'] ?? 0);
+            $qty       = (int)($item['quantity'] ?? 1);
+        @endphp
+
         <div class="cart-row">
-          <img class="cart-img" src="{{ $item['image'] ?? asset('assets/tienda1.png') }}"
-               alt="{{ $item['title'] ?? 'Producto' }}">
+          <img class="cart-img"
+               src="{{ $img }}"
+               alt="{{ $title }}">
 
           <div class="cart-info">
-            <div class="cart-title">{{ $item['title'] ?? 'Producto' }}</div>
+            <div class="cart-title">{{ $title }}</div>
 
             <div class="cart-price-unit">
-              {{ '$ ' . number_format((int)($item['price'] ?? 0), 0, ',', '.') }}
+              {{ '$ ' . number_format($unitPrice, 0, ',', '.') }}
             </div>
 
             {{-- Formulario para actualizar cantidad --}}
             <form method="POST" action="{{ route('cart.update') }}" class="cart-qty">
               @csrf
               <input type="hidden" name="product_id" value="{{ (int)$id }}">
-              <input type="number" min="1" name="qty" value="{{ (int)($item['quantity'] ?? 1) }}">
+              <input type="number" min="1" name="qty" value="{{ $qty }}">
               <button type="submit" class="btn">Actualizar</button>
             </form>
           </div>
@@ -32,7 +64,7 @@
           {{-- Totales por línea --}}
           <div class="cart-line-right">
             <div class="cart-line-total">
-              {{ '$ ' . number_format((int)$item['price'] * (int)$item['quantity'], 0, ',', '.') }}
+              {{ '$ ' . number_format($unitPrice * $qty, 0, ',', '.') }}
             </div>
 
             <form method="POST" action="{{ route('cart.remove') }}">

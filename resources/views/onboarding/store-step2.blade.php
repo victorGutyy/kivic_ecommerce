@@ -58,16 +58,19 @@
                     >
                 </div>
 
-                {{-- Industria --}}
+               {{-- Industria --}}
                 <div style="margin-bottom: 16px;">
                     <label style="display:block; font-size:14px; font-weight:600; color:#020617; margin-bottom:4px;">
                         Sector o industria (opcional)
                     </label>
+
+                    {{-- Input con lista de opciones sugeridas --}}
                     <input
                         type="text"
                         name="industry"
+                        list="industry-options"
                         value="{{ old('industry', $data['industry'] ?? '') }}"
-                        placeholder="Ropa, Calzado, Tecnología, Belleza..."
+                        placeholder="Selecciona o escribe: Ropa, Calzado, Tecnología, Belleza..."
                         style="
                             width:100%;
                             padding: 10px 12px;
@@ -79,6 +82,75 @@
                             outline:none;
                         "
                     >
+
+                    <datalist id="industry-options">
+                            <!-- MODA -->
+                            <option value="Ropa">
+                            <option value="Lencería">
+                            <option value="Calzado">
+                            <option value="Moda infantil">
+
+                            <!-- BELLEZA -->
+                            <option value="Estética">
+                            <option value="Belleza">
+                            <option value="Barbería">
+                            <option value="Spa">
+
+                            <!-- TECNOLOGÍA -->
+                            <option value="Tecnología">
+                            <option value="Electrónica">
+                            <option value="Gaming">
+                            <option value="Electrodomésticos">
+
+                            <!-- HOGAR -->
+                            <option value="Hogar">
+                            <option value="Decoración">
+                            <option value="Muebles">
+
+                            <!-- ALIMENTOS -->
+                            <option value="Panadería">
+                            <option value="Cafetería">
+                            <option value="Restaurante">
+                            <option value="Minimercado">
+
+                            <!-- ASEO -->
+                            <option value="Aseo">
+
+                            <!-- MASCOTAS -->
+                            <option value="Mascotas">
+
+                            <!-- PAPELERÍA / LIBRERÍA -->
+                            <option value="Papelería">
+                            <option value="Librería">
+
+                            <!-- FIESTAS / REGALOS -->
+                            <option value="Regalos">
+                            <option value="Fiestas">
+                            <option value="Floristería">
+
+                            <!-- JOYERÍA -->
+                            <option value="Joyería">
+                            <option value="Accesorios">
+
+                            <!-- AUTO / MOTO -->
+                            <option value="Autopartes">
+                            <option value="Motos">
+
+                            <!-- SALUD -->
+                            <option value="Farmacia">
+                            <option value="Tienda naturista">
+
+                            <!-- NIÑOS -->
+                            <option value="Juguetería">
+
+                            <!-- SERVICIOS -->
+                            <option value="Servicios">
+                        </datalist>
+
+
+                    <p style="font-size:12px; color:#6b7280; margin-top:4px;">
+                        Puedes elegir una de la lista o escribir tu propia industria.
+                    </p>
                 </div>
 
                 {{-- Teléfono --}}
@@ -148,6 +220,77 @@
                             outline:none;
                         "
                     >
+                </div>
+
+                {{-- 🔹 NUEVAS REDES: Facebook, TikTok, YouTube --}}
+                <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-bottom:16px;">
+
+                    <div>
+                        <label style="display:block; font-size:14px; font-weight:600; color:#020617; margin-bottom:4px;">
+                            Facebook (opcional)
+                        </label>
+                        <input
+                            type="text"
+                            name="facebook"
+                            value="{{ old('facebook', $data['facebook'] ?? '') }}"
+                            placeholder="Ej: facebook.com/mitienda"
+                            style="
+                                width:100%;
+                                padding: 10px 12px;
+                                font-size: 15px;
+                                border-radius: 10px;
+                                border: 1px solid #d1d5db;
+                                background:#ffffff;
+                                color:#020617;
+                                outline:none;
+                            "
+                        >
+                    </div>
+
+                    <div>
+                        <label style="display:block; font-size:14px; font-weight:600; color:#020617; margin-bottom:4px;">
+                            TikTok (opcional)
+                        </label>
+                        <input
+                            type="text"
+                            name="tiktok"
+                            value="{{ old('tiktok', $data['tiktok'] ?? '') }}"
+                            placeholder="Ej: @mitienda"
+                            style="
+                                width:100%;
+                                padding: 10px 12px;
+                                font-size: 15px;
+                                border-radius: 10px;
+                                border: 1px solid #d1d5db;
+                                background:#ffffff;
+                                color:#020617;
+                                outline:none;
+                            "
+                        >
+                    </div>
+
+                    <div>
+                        <label style="display:block; font-size:14px; font-weight:600; color:#020617; margin-bottom:4px;">
+                            YouTube (opcional)
+                        </label>
+                        <input
+                            type="text"
+                            name="youtube"
+                            value="{{ old('youtube', $data['youtube'] ?? '') }}"
+                            placeholder="Ej: youtube.com/mitienda"
+                            style="
+                                width:100%;
+                                padding: 10px 12px;
+                                font-size: 15px;
+                                border-radius: 10px;
+                                border: 1px solid #d1d5db;
+                                background:#ffffff;
+                                color:#020617;
+                                outline:none;
+                            "
+                        >
+                    </div>
+
                 </div>
 
                 {{-- Ciudad --}}

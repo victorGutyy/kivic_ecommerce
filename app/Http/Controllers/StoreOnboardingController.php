@@ -51,6 +51,9 @@ class StoreOnboardingController extends Controller
             'phone'      => ['nullable','string','max:30'],
             'whatsapp'   => ['nullable','string','max:30'],
             'instagram'  => ['nullable','string','max:100'],
+            'facebook'   => ['nullable','string','max:150'],
+            'tiktok'     => ['nullable','string','max:150'],
+            'youtube'    => ['nullable','string','max:150'],
             'city'       => ['nullable','string','max:100'],
         ]);
 
@@ -84,6 +87,7 @@ class StoreOnboardingController extends Controller
         $validated = $request->validate([
             'plan'  => ['required','in:free,starter,pro'],
             'theme' => ['required','in:kivic-classic,kivic-minimal,kivic-dark'],
+            'logo'  => ['nullable','image','max:2048'], // NUEVO: logo opcional
         ]);
 
         $data = $request->session()->get('onboarding.store', []);
@@ -103,6 +107,13 @@ class StoreOnboardingController extends Controller
             $slug = $base.'-'.$i++;
         }
 
+        // Guardar logo si viene
+        $logoPath = null;
+        if ($request->hasFile('logo')) {
+            // se guardará en storage/app/public/stores/logos/...
+            $logoPath = $request->file('logo')->store('stores/logos', 'public');
+        }
+
         $store = Store::create([
             'owner_id'  => auth()->id(),
             'name'      => $data['name'],
@@ -114,9 +125,13 @@ class StoreOnboardingController extends Controller
             'phone'     => $data['phone'] ?? null,
             'whatsapp'  => $data['whatsapp'] ?? null,
             'instagram' => $data['instagram'] ?? null,
+            'facebook'  => $data['facebook'] ?? null,
+            'tiktok'    => $data['tiktok'] ?? null,
+            'youtube'   => $data['youtube'] ?? null,
             'city'      => $data['city'] ?? null,
             'plan'      => $data['plan'],
             'theme'     => $data['theme'],
+            'logo_path'  => $logoPath, // NUEVO
         ]);
 
         // Limpiar datos de sesión del wizard

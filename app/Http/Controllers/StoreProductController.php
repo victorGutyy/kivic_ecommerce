@@ -42,19 +42,20 @@ class StoreProductController extends Controller
             'store_id'    => $store->id,
             'title'       => $data['title'],
             'description' => $data['description'] ?? null,
-            'price'       => (int)($data['price'] * 100), // si guardas en centavos
+            'price'       => (int) $data['price'], 
             'active'      => $data['active'] ?? true,
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('products', 'public');
+    // Guardar en: storage/app/public/products/....
+    $path = $request->file('image')->store('products', 'public');
 
-            // si usas tabla product_images
-            ProductImage::create([
-                'product_id' => $product->id,
-                'url'        => 'storage/'.$path,
-            ]);
-        }
+    // IMPORTANTE: guardamos solo la ruta relativa (products/archivo.jpg)
+    ProductImage::create([
+        'product_id' => $product->id,
+        'url'        => $path, // sin storage/
+    ]);
+}
 
         return redirect()
             ->route('stores.products.index', $store)

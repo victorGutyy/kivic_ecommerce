@@ -20,6 +20,7 @@ protected $fillable = [
         'city',
         'plan',
         'theme',
+        'logo_path', 
     ];
 
  public function getRouteKeyName(): string

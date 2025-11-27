@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,6 +13,10 @@ class CartController extends Controller
     {
         $cart = $request->session()->get('cart', []);
 
+        // Tienda a la que pertenece este carrito (si existe)
+        $storeId = $request->session()->get('cart_store_id');
+        $store   = $storeId ? Store::find($storeId) : null;
+
         // Totales (en pesos)
         $subtotal = collect($cart)->sum(fn ($i) => (int)$i['price'] * (int)$i['quantity']);
         $iva      = (int) round($subtotal * 0.19);   // 19%
@@ -20,7 +25,15 @@ class CartController extends Controller
 
         $fmt = fn (int $v) => '$ ' . number_format($v, 0, ',', '.');
 
-        return view('shop.cart', compact('cart', 'subtotal', 'iva', 'shipping', 'total', 'fmt'));
+        return view('shop.cart', compact(
+            'cart',
+            'subtotal',
+            'iva',
+            'shipping',
+            'total',
+            'fmt',
+            'store'          // 👈 muy importante para el layout.shop
+        ));
     }
 
     // POST /cart/add/{product}
@@ -29,16 +42,30 @@ class CartController extends Controller
         $qty  = max(1, (int)$request->input('qty', 1));
         $cart = $request->session()->get('cart', []);
 
-        // 1 sola línea por producto (clave = id)
+        $productStoreId   = $product->store_id;
+        $currentCartStore = $request->session()->get('cart_store_id');
+
+        // Si el carrito ya tiene productos de otra tienda, lo reiniciamos (MVP)
+        if ($currentCartStore && $currentCartStore !== $productStoreId) {
+            $cart = [];
+        }
+
+        // Asociar el carrito a la tienda de este producto
+        $request->session()->put('cart_store_id', $productStoreId);
+
         if (isset($cart[$product->id])) {
+            // Si ya existe en el carrito, solo sumamos cantidad
             $cart[$product->id]['quantity'] += $qty;
         } else {
-            $img = optional($product->images->first())->src ?? asset('assets/tienda1.png');
+            $firstImage = $product->images->first();
+            $imgPath    = $firstImage->url ?? null; // guardamos solo la ruta relativa
+
             $cart[$product->id] = [
                 'id'       => $product->id,
+                'store_id' => $productStoreId,
                 'title'    => $product->title,
-                'price'    => (int) $product->price,   // en pesos
-                'image'    => $img,
+                'price'    => (int) $product->price,   // en pesos normales
+                'image'    => $imgPath,                // ej: "products/archivo.jpg"
                 'quantity' => $qty,
             ];
         }
@@ -70,6 +97,12 @@ class CartController extends Controller
         $cart = $request->session()->get('cart', []);
 
         unset($cart[$id]);
+
+        // Si ya no quedan items en el carrito, olvidar también la tienda
+        if (empty($cart)) {
+            $request->session()->forget('cart_store_id');
+        }
+
         $request->session()->put('cart', $cart);
 
         return back();
@@ -78,7 +111,7 @@ class CartController extends Controller
     // POST /cart/clear
     public function clear(Request $request)
     {
-        $request->session()->forget('cart');
+        $request->session()->forget(['cart', 'cart_store_id']);
 
         return back();
     }

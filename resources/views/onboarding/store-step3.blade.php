@@ -32,7 +32,9 @@
             </p>
 
             {{-- FORMULARIO --}}
-            <form method="POST" action="{{ route('stores.finish') }}">
+            <form method="POST"
+                  action="{{ route('stores.finish') }}"
+                  enctype="multipart/form-data">
                 @csrf
 
                 {{-- PLANES --}}
@@ -125,6 +127,32 @@
                     </div>
                     @error('theme')
                         <p style="color:#b91c1c; font-size:12px; margin-top:4px;">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                {{-- LOGO DE LA TIENDA --}}
+                <div style="margin-bottom: 24px;">
+                    <label style="display:block; font-size:14px; font-weight:700; color:#020617; margin-bottom:8px;">
+                        Logo de la tienda (opcional)
+                    </label>
+
+                    <input type="file" name="logo"
+                           style="
+                                display:block;
+                                padding:10px;
+                                border:1px solid #e5e7eb;
+                                border-radius:12px;
+                                width:100%;
+                           ">
+
+                    <p style="font-size: 12px; color:#6b7280; margin-top:6px;">
+                        Formatos permitidos: JPG o PNG — Máximo 2 MB.
+                    </p>
+
+                    @error('logo')
+                        <p style="color:#b91c1c; font-size:12px; margin-top:4px;">
+                            {{ $message }}
+                        </p>
                     @enderror
                 </div>
 

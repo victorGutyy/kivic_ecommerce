@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ $title ?? (($store->brand_name ?? $store->name).' · KIVIC') }}</title>
+
+  <title>
+    {{ $title ?? (isset($store) ? ($store->brand_name ?? $store->name).' · KIVIC' : 'KIVIC Commerce') }}
+  </title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   @vite(['resources/css/app.css','resources/js/app.js'])
@@ -12,57 +15,88 @@
 
 <body class="store-layout">
 
-  {{-- Topbar tienda REAL (logo + datos de la store) --}}
+  @php
+      use Illuminate\Support\Str;
+
+      // ¿Estamos en contexto de tienda?
+      $hasStore = isset($store);
+
+      // Carrito (lo calculamos una sola vez)
+      $cartCount = collect(session('cart', []))->sum('quantity');
+
+      // Lógica de logo
+      if ($hasStore) {
+          // demo = id 1 (puedes cambiarlo a slug si quieres)
+          $isDemo = $store->id === 1;
+
+          if ($isDemo) {
+              // La tienda demo sí muestra el logo KIVIC
+              $logo = asset('assets/Kivic-logo.png');
+          } elseif ($store->logo_path) {
+              // Tiendas reales con logo propio
+              $logo = asset('storage/'.$store->logo_path);
+          } else {
+              // Sin logo → placeholder
+              $logo = null;
+          }
+      } else {
+          // Páginas sin tienda (cart, checkout, etc.)
+          $isDemo = false;
+          $logo = asset('assets/Kivic-logo.png');
+      }
+  @endphp
+
+  {{-- Topbar (tienda real o vista genérica de KIVIC) --}}
   <header class="shopbar">
     <div class="shopbar__inner container">
-      <a href="{{ route('shop.index', ['store' => $store->slug]) }}" class="shopbar__brand">
-       @php
-    use Illuminate\Support\Str;
 
-    // demo = id 1 (puedes cambiarlo a slug 'moda-basica' si quieres)
-    $isDemo = $store->id === 1;
+      {{-- Marca / logo --}}
+      <a href="{{ $hasStore ? route('shop.index', ['store' => $store->slug]) : url('/') }}"
+         class="shopbar__brand">
 
-    if ($isDemo) {
-        // la tienda demo sí muestra el logo KIVIC
-        $logo = asset('assets/Kivic-logo.png');
-    } elseif ($store->logo_path) {
-        // tiendas reales con logo propio
-        $logo = asset('storage/'.$store->logo_path);
-    } else {
-        // sin logo → usamos placeholder
-        $logo = null;
-    }
-@endphp
+        @if($logo)
+            <img src="{{ $logo }}"
+                 alt="{{ $hasStore ? ($store->brand_name ?? $store->name) : 'KIVIC Commerce' }}"
+                 class="shopbar__logo">
+        @else
+            <div class="store-logo-placeholder">
+                @if($hasStore)
+                    {{ Str::upper(Str::substr($store->brand_name ?? $store->name, 0, 1)) }}
+                @else
+                    K
+                @endif
+            </div>
+        @endif
 
-<a href="{{ route('shop.index', ['store' => $store->slug]) }}" class="shopbar__brand">
-    @if($logo)
-        <img src="{{ $logo }}" alt="{{ $store->name }}" class="shopbar__logo">
-    @else
-        <div class="store-logo-placeholder">
-            {{ Str::upper(Str::substr($store->name, 0, 1)) }}
-        </div>
-    @endif
-
-    <span>{{ $store->brand_name ?? $store->name }}</span>
-</a>
-
+        <span>
+            {{ $hasStore ? ($store->brand_name ?? $store->name) : 'KIVIC Commerce' }}
+        </span>
+      </a>
 
       {{-- Buscador --}}
       <form method="GET" class="shopbar__search">
-        <input name="q" value="{{ request('q') }}" placeholder="¿Qué estás buscando?" aria-label="Buscar">
+        <input name="q"
+               value="{{ request('q') }}"
+               placeholder="¿Qué estás buscando?"
+               aria-label="Buscar">
         <button type="submit">Buscar</button>
       </form>
 
       {{-- NAVBAR DERECHA --}}
-      @php
-        $cartCount = collect(session('cart', []))->sum('quantity');
-      @endphp
-
       <nav class="shopbar__links" style="display:flex;gap:16px;align-items:center">
-        <a href="{{ route('shop.index', ['store' => $store->slug]) }}">Categorías</a>
 
-        <a href="{{ route('cart.view') }}" class="cart-link" style="position:relative;display:inline-flex;align-items:center;gap:.5rem">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8"><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h3l3 12h10l2-8H6"/></svg>
+        @if($hasStore)
+            <a href="{{ route('shop.index', ['store' => $store->slug]) }}">Categorías</a>
+        @endif
+
+        <a href="{{ route('cart.view') }}"
+           class="cart-link"
+           style="position:relative;display:inline-flex;align-items:center;gap:.5rem">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.8">
+            <circle cx="10" cy="20" r="1"/>
+            <circle cx="18" cy="20" r="1"/>
+            <path d="M2 3h3l3 12h10l2-8H6"/>
+          </svg>
           <span class="cart-count">{{ $cartCount }}</span>
         </a>
 
@@ -79,15 +113,20 @@
     @yield('content')
   </main>
 
-  {{-- Botón flotante de carrito (lo mantenemos) --}}
-  @php $cartCount = collect(session('cart', []))->sum('quantity'); @endphp
+  {{-- Botón flotante de carrito --}}
   <a href="{{ route('cart.view') }}" class="cart-fab" aria-label="Ver carrito">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h3l3 12h10l2-8H6"/></svg>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+      <circle cx="10" cy="20" r="1"/>
+      <circle cx="18" cy="20" r="1"/>
+      <path d="M2 3h3l3 12h10l2-8H6"/>
+    </svg>
     @if($cartCount)
       <span class="cart-fab__count">{{ $cartCount }}</span>
     @endif
   </a>
 
-  @include('partials.footer') {{-- footer global de KIVIC --}}
+  {{-- Footer propio de la tienda --}}
+@include('components.store-footer')
+
 </body>
 </html>
