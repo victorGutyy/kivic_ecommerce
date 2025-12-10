@@ -18,6 +18,26 @@ require __DIR__.'/auth.php';
 
 /*
 |--------------------------------------------------------------------------
+| PÁGINAS INFORMATIVAS (KIVIC)
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('info')->group(function () {
+
+    // Servicios
+    Route::view('/diseno-tienda', 'pages.servicios.diseno')->name('info.diseno');
+    Route::view('/integraciones', 'pages.servicios.integraciones')->name('info.integraciones');
+    Route::view('/soporte', 'pages.servicios.soporte')->name('info.soporte');
+
+    // Contenido
+    Route::view('/tienda-demo', 'pages.contenido.demo')->name('info.demo');
+    Route::view('/guias', 'pages.contenido.guias')->name('info.guias');
+    Route::view('/blog', 'pages.contenido.blog')->name('info.blog');
+});
+
+
+/*
+|--------------------------------------------------------------------------
 | RUTAS PROTEGIDAS (usuario autenticado)
 |--------------------------------------------------------------------------
 */

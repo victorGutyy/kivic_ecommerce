@@ -12,7 +12,9 @@
   @vite(['resources/css/app.css','resources/js/app.js'])
  <link rel="stylesheet" href="{{ asset('css/kivic.css') }}?v={{ filemtime(public_path('css/kivic.css')) }}">
 </head>
-<body>
+
+  <body class="public-body">
+
   {{-- NAVBAR (estilo Jumpseller) --}}
 <nav class="topbar">
   <div class="container topbar__inner">
@@ -39,9 +41,9 @@
       <li class="has-dropdown">
         <a href="#">Servicios</a>
         <ul class="dropdown">
-          <li><a href="#">Diseño de tienda</a></li>
-          <li><a href="#">Integraciones</a></li>
-          <li><a href="#">Soporte & asistencia</a></li>
+          <li><a href="{{ route('info.diseno') }}">Diseño de tienda</a></li>
+          <li><a href="{{ route('info.integraciones') }}">Integraciones</a></li>
+          <li><a href="{{ route('info.soporte') }}">Soporte & asistencia</a></li>
         </ul>
       </li>
 
@@ -49,8 +51,8 @@
         <a href="#">Contenido</a>
         <ul class="dropdown">
           <li><a href="{{ route('shop.index',['store'=>'moda-basica']) }}">Tienda demo</a></li>
-          <li><a href="#">Guías</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="{{ route('info.guias') }}">Guías</a></li>
+          <li><a href="{{ route('info.blog') }}">Blog</a></li>
         </ul>
       </li>
 

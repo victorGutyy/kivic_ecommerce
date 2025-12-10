@@ -17,7 +17,7 @@ body {
 }
 
 /* Fondo difuminado */
-body::before {
+.public-body::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -1283,4 +1283,217 @@ body{
 }
 
 
+/* ============================================
+   HERO
+============================================ */
+.kv-hero-light {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f2ff, #e8f1ff);
+}
 
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: #475569;
+    margin-bottom: 15px;
+}
+
+.hero-desc {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #334155;
+}
+
+.hero-img img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+
+/* ============================================
+   GRID DE INTEGRACIONES
+============================================ */
+.kv-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.kv-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    transition: transform .2s;
+}
+
+.kv-card:hover {
+    transform: translateY(-5px);
+}
+
+.kv-icon {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+
+/* ============================================
+   BENEFICIOS
+============================================ */
+.kv-list-check li {
+    margin-bottom: 12px;
+    font-size: 17px;
+    color: #334155;
+    position: relative;
+    padding-left: 25px;
+}
+
+.kv-list-check li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #10b981;
+    font-weight: bold;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.benefit-img {
+    width: 100%;
+    border-radius: 18px;
+}
+
+
+/* ============================================
+   CTA FINAL
+============================================ */
+.kv-cta {
+    padding: 70px 0;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f0f8ff);
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 20px;
+    background: #4338ca;
+    padding: 14px 28px;
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(67,56,202,0.25);
+}
+
+/* ================================
+   FIX GLOBAL — Mejor contraste
+================================ */
+
+/* Tarjetas informativas */
+.kv-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.07);        /* mejora contraste */
+    color: #1e293b;                             /* texto más oscuro */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Texto dentro de tarjetas */
+.kv-card h3 {
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.kv-card p {
+    color: #334155;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Secciones claras */
+.kv-section-light {
+    background: #f1f5f9 !important;            /* gris muy suave para contraste */
+}
+
+/* HERO: oscurecemos texto */
+.hero-title {
+    color: #0f172a !important;
+}
+
+.hero-subtitle {
+    color: #475569 !important;
+}
+
+.hero-desc {
+    color: #334155 !important;
+}
+
+/* Listas con check */
+.kv-list-check li {
+    color: #1e293b !important;
+}
+
+/* CTA: mantener contraste máximo */
+.kv-cta h2 {
+    color: #0f172a !important;
+}
+
+.kv-cta {
+    background: #f8fafc;                       /* fondo más limpio */
+}
+
+/* FIX específico para la sección de Diseño de Tienda */
+.design-list-box {
+    background: #ffffff !important;
+    padding: 40px 45px;
+    border-radius: 18px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Texto dentro de esta caja */
+.design-list-box p, 
+.design-list-box li {
+    color: #1e293b !important;      /* gris oscuro, alto contraste */
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* Listas con check dentro de esta sección */
+.design-list-box .kv-list-check li::before {
+    color: #10b981 !important;
+}
+
+/* === FIX PARA LA PÁGINA DE INTEGRACIONES — TEXTO MUY CLARO === */
+
+.integraciones-header h2.kv-title {
+    color: #0f172a !important;     /* Negro suave */
+    font-weight: 800 !important;
+}
+
+.integraciones-header p.kv-subtitle {
+    color: #334155 !important;     /* Gris oscuro legible */
+    font-size: 18px !important;
+    font-weight: 500 !important;
+}
