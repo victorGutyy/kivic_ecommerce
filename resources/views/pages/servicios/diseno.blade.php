@@ -18,7 +18,7 @@
         </div>
 
         <div class="hero-img">
-            <img src="{{ asset('assets/soporte tecnico.jpg') }}" alt="Diseño de tienda KIVIC">
+            <img src="{{ asset('assets/diseño-1.jpg') }}" alt="Diseño de tienda KIVIC">
         </div>
 
     </div>

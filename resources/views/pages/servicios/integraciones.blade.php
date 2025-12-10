@@ -44,31 +44,31 @@
             </div>
 
             <div class="kv-card">
-                <img src="{{ asset('assets/shipping.png') }}" class="kv-icon">
+                <img src="{{ asset('assets/envios.jpg') }}" class="kv-icon">
                 <h3>Métodos de envío</h3>
                 <p>Coordinadora, Envía, Servientrega</p>
             </div>
 
             <div class="kv-card">
-                <img src="{{ asset('assets/facebook-shop.png') }}" class="kv-icon">
+                <img src="{{ asset('assets/f-i.jpg') }}" class="kv-icon">
                 <h3>Facebook & Instagram Shop</h3>
                 <p>Conecta tu catálogo en minutos</p>
             </div>
 
             <div class="kv-card">
-                <img src="{{ asset('assets/google.png') }}" class="kv-icon">
+                <img src="{{ asset('assets/google-commerce.jpg') }}" class="kv-icon">
                 <h3>Google Commerce</h3>
                 <p>Google Shopping y anuncios inteligentes</p>
             </div>
 
             <div class="kv-card">
-                <img src="{{ asset('assets/whatsapp.png') }}" class="kv-icon">
+                <img src="{{ asset('assets/whatsapp.jpg') }}" class="kv-icon">
                 <h3>WhatsApp Business API</h3>
                 <p>Vende y gestiona pedidos desde WhatsApp</p>
             </div>
 
             <div class="kv-card">
-                <img src="{{ asset('assets/mercadolibre.png') }}" class="kv-icon">
+                <img src="{{ asset('assets/mercado-libre.jpg') }}" class="kv-icon">
                 <h3>Mercado Libre</h3>
                 <p>Sincronización de productos y pedidos</p>
             </div>
