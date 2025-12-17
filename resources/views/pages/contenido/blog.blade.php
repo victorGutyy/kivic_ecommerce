@@ -17,7 +17,7 @@
         </div>
 
         <div class="hero-img">
-            <img src="{{ asset('assets/hero-blog.png') }}" alt="Blog KIVIC">
+            <img src="{{ asset('assets/blog.jpg') }}" alt="Blog KIVIC">
         </div>
 
     </div>
