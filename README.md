@@ -1,61 +1,247 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# 🛒 KIVIC E-COMMERCE
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Plataforma Multitienda en Laravel**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+KIVIC es una plataforma de **e-commerce multitienda** desarrollada en **Laravel**, diseñada para permitir la creación y gestión de múltiples tiendas dentro de un mismo sistema.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📋 Requisitos del sistema
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Antes de clonar el proyecto, asegúrate de tener instalado:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* **PHP** >= 8.2
+* **Composer**
+* **Node.js** >= 18
+* **NPM**
+* **MySQL** o **MariaDB**
+* **Git**
+* **Servidor local** (XAMPP, Laragon o similar)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 📥 Clonar el repositorio
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone https://github.com/victorGutyy/kivic_ecommerce.git
+cd kivic_ecommerce
+```
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📦 Instalación de dependencias
 
-## Contributing
+### Backend (Laravel)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+```
 
-## Code of Conduct
+### Frontend (Vite)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+npm install
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## ⚙️ Configuración del entorno
 
-## License
+### 1️⃣ Crear archivo `.env`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+En **Windows (Git Bash)**:
+
+```bash
+cp .env.example .env
+```
+
+Si el comando falla, crea el archivo manualmente copiando `.env.example`.
+
+---
+
+### 2️⃣ Configurar variables importantes en `.env`
+
+```env
+APP_NAME=KIVIC
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kivic_mvp
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+---
+
+### 3️⃣ Generar la clave de la aplicación
+
+```bash
+php artisan key:generate
+```
+
+---
+
+## 🗄️ Base de datos
+
+### Crear la base de datos
+
+Desde **phpMyAdmin** o MySQL:
+
+```sql
+CREATE DATABASE kivic_mvp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+---
+
+### Migraciones
+
+```bash
+php artisan migrate
+```
+
+> ⚠️ Si el proyecto incluye datos reales o de prueba, el líder del proyecto compartirá el **backup SQL** correspondiente.
+
+---
+
+## 🎨 Compilar assets (Vite)
+
+### Modo desarrollo
+
+```bash
+npm run dev
+```
+
+### (Opcional) Modo producción
+
+```bash
+npm run build
+```
+
+> ⚠️ Si aparece el error **ViteManifestNotFoundException**, asegúrate de haber ejecutado `npm run dev` o `npm run build`.
+
+---
+
+## ▶️ Ejecutar el proyecto
+
+```bash
+php artisan serve
+```
+
+Abrir en el navegador:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 🏪 Acceso a tiendas
+
+Las tiendas se acceden por **slug**, por ejemplo:
+
+```
+http://127.0.0.1:8000/purpura-store
+```
+
+> ⚠️ Si una tienda no existe, verifica la tabla `stores` en la base de datos.
+
+---
+
+## 🧪 Problemas comunes y soluciones
+
+### ❌ Error: `Vite manifest not found`
+
+✔ Ejecutar:
+
+```bash
+npm run dev
+```
+
+---
+
+### ❌ Error: `Unknown column 'logo_path'`
+
+✔ Ejecutar migraciones actualizadas:
+
+```bash
+php artisan migrate
+```
+
+---
+
+### ❌ Error: `Table cache doesn't exist`
+
+✔ Ejecutar:
+
+```bash
+php artisan cache:table
+php artisan migrate
+```
+
+---
+
+## 🌿 Flujo de trabajo Git (OBLIGATORIO)
+
+🚫 **NO trabajar directamente en `main`**
+
+### Crear una nueva rama
+
+```bash
+git checkout -b feature/nombre-de-la-tarea
+```
+
+### Subir cambios
+
+```bash
+git add .
+git commit -m "feat: descripción clara del cambio"
+git push origin feature/nombre-de-la-tarea
+```
+
+### Pull Request
+
+* Crear PR en GitHub
+* Revisión obligatoria
+* Merge a `main`
+
+---
+
+## 🔐 Reglas del repositorio
+
+* `main` está protegida
+* Pull Request obligatorio
+* Commits claros y descriptivos
+* No subir `.env`
+* No subir `vendor/` ni `node_modules/`
+
+---
+
+## 👥 Equipo
+
+Proyecto liderado por **Victor Gutyy**
+Plataforma desarrollada como **proyecto colaborativo**.
+
+---
+
+## 📄 Licencia
+
+Proyecto privado – uso interno del equipo KIVIC.
+
+---
+
+## 🏁 Estado del proyecto
+
+🚧 En desarrollo activo
+✔ Base funcional
+✔ Flujo Git profesional
+✔ Listo para trabajo en equipo
+
+
